@@ -11,9 +11,9 @@ st.title("Patient's Data Analyzer")
 # Create form for file and text inputs
 with st.form("patient_form"):
     file = st.file_uploader("Select a file", type=["jpg", "png", "pdf"])
-    text_field1 = st.text_input("Enter patient ID")
-    text_field2 = st.text_input("Enter doctor's name")
-    text_field3 = st.text_input("Enter additional notes")
+    text_field1 = st.text_input("Enter Patient ID")
+    text_field2 = st.text_input("Enter Record Type")
+    text_field3 = st.text_input("Enter Report ID")
     
     submit_button = st.form_submit_button("Submit")
 
@@ -22,12 +22,12 @@ if submit_button:
     if file and text_field1 and text_field2 and text_field3:
         with st.spinner("Analyzing data..."):
             # Define the API endpoint and prepare data for the request
-            endpoint_url = "https://example.com/api/upload"  # Replace with your API endpoint
+            endpoint_url = "https://gyjbea39k8.execute-api.us-west-2.amazonaws.com/dev/v1"  # Replace with your API endpoint
             files = {"file": file.getvalue()}
             data = {
                 "patient_id": text_field1,
-                "doctor_name": text_field2,
-                "notes": text_field3
+                "report_type": text_field2,
+                "report_id": text_field3
             }
 
             # Make the curl call (POST request in this case)
