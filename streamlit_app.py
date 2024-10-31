@@ -71,11 +71,14 @@ if submit_button:
             result_dynamo = json.loads(response_dynamo.text)  # Parse JSON response
 
             body_dynamo = result_dynamo["body"]
-            st.write(body_dynamo)
-            st.write("-----------------------------------------------------------")
+            # st.write(body_dynamo)
+            # st.write("-----------------------------------------------------------")
 
-            for entity in body_dynamo:
-                st.write(entity)
+            for report_category in body_dynamo:
+                st.write(report_category["Report#Category"])
+                st.write("Entities")
+                for entity in report_category["Entities"]:
+                    st.write(" - " + entity)
                 st.write("-------------")
 
         except requests.exceptions.RequestException as e:
