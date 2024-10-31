@@ -57,7 +57,7 @@ if submit_button:
             response = requests.request("POST", endpoint_url, headers=headers, data=payload)
             # st.text_input(response.text)
 
-            result = response.text  # Parse JSON response
+            result = json.loads(response.text)  # Parse JSON response
             # st.text_input(result)
             st.text_input(result["body"]["url"])
 
