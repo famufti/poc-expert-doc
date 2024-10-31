@@ -58,8 +58,10 @@ if submit_button:
             st.text_input(response.text)
 
             result = json.loads(response.text)  # Parse JSON response
-            # st.text_input(result)
-            st.text_input(result["body"]["url"])
+            body = json.loads(result["body"])
+            print(body)
+            
+            st.text_input(body["url"])
 
         except requests.exceptions.RequestException as e:
             st.error(f"An error occurred: {e}")
