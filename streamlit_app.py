@@ -57,13 +57,14 @@ if submit_button:
 
         try:
             # Created data for Curl call
-            end-point = "https://esmjsglf4h.execute-api.us-west-2.amazonaws.com/dev/v1/?patient_id=2"# + text_patient_id
+            end_point = "https://esmjsglf4h.execute-api.us-west-2.amazonaws.com/dev/v1/?patient_id=2"
+            # + text_patient_id
             payload = {}
             headers = {
                 'Content-Type': 'application/json'
             }
 
-            response_dynamo = requests.request("get", end-point, headers=headers, data=payload)
+            response_dynamo = requests.request("get", end_point, headers=headers, data=payload)
             result_dynamo = json.loads(response_dynamo.text)  # Parse JSON response
             print(response_dynamo.text)
             st.text_input(response_dynamo.text)
