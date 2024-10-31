@@ -22,8 +22,13 @@ with st.form("patient_form"):
 if submit_button:
     print("----File----")
     st.text_input("----File----")
-    print(file.getvalue())
-    st.text_input(file.getvalue())
+
+    # print(file.getvalue())
+    # st.text_input(file.getvalue())
+
+    f = open(file, 'rb')
+    print(f)
+    st.text_input(f)
 
     # if text_patient_id and text_report_type and text_report_id:
 
