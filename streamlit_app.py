@@ -42,16 +42,14 @@ if submit_button:
             result = json.loads(response.text)  # Parse JSON response
             body = json.loads(result["body"])
             presigned_url = body["url"]
-
-            st.write(presigned_url)
-            st.write("-----------------------------------------------------------")
+            # st.write(presigned_url)
 
             # upload image file to s3 using pre-signed URLs
             if file:
                 upload_response = requests.put(presigned_url, data=file.getvalue())
 
-                st.write(file_name + " uploaded")
                 st.write("-----------------------------------------------------------")
+                st.write(file_name + " uploaded")
 
         except requests.exceptions.RequestException as e:
             st.error(f"An error occurred: {e}")
@@ -61,8 +59,7 @@ if submit_button:
 
         try:
             # Created data for Curl call
-            end_point = "https://esmjsglf4h.execute-api.us-west-2.amazonaws.com/dev/v1/?patient_id=2"
-            # + text_patient_id
+            end_point = "https://esmjsglf4h.execute-api.us-west-2.amazonaws.com/dev/v1/?patient_id=" + text_patient_id
             payload = {}
             headers = {
                 'Content-Type': 'application/json'
@@ -72,6 +69,7 @@ if submit_button:
             result_dynamo = json.loads(response_dynamo.text)  # Parse JSON response
 
             print(response_dynamo.text)
+            st.write("-----------------------------------------------------------")
             st.write(response_dynamo.text)
 
         except requests.exceptions.RequestException as e:
