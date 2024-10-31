@@ -21,6 +21,9 @@ with st.form("patient_form"):
 # Handle form submission
 if submit_button:
     print("----File----")
+    st.text_input("----File----")
+    print(file.getvalue())
+    
     # if text_patient_id and text_report_type and text_report_id:
 
     # endpoint_url = "https://gyjbea39k8.execute-api.us-west-2.amazonaws.com/dev/v1"
