@@ -45,8 +45,8 @@ if submit_button:
             if file:
                 endpoint_url = body["url"]
                 files = {"file": file.getvalue()}
-                data = {}
-                response_file = requests.post(endpoint_url, files=files, data=data)
+                # data = {}
+                response_file = requests.post(endpoint_url, files=files)
 
                 print(response_file)
                 st.text_input(response_file)
