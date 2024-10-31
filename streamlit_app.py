@@ -42,14 +42,16 @@ if submit_button:
             result = json.loads(response.text)  # Parse JSON response
             body = json.loads(result["body"])
             presigned_url = body["url"]
+
             # st.write(presigned_url)
+            # st.write("-----------------------------------------------------------")
 
             # upload image file to s3 using pre-signed URLs
             if file:
                 upload_response = requests.put(presigned_url, data=file.getvalue())
 
-                st.write("-----------------------------------------------------------")
                 st.write(file_name + " uploaded")
+                st.write("-----------------------------------------------------------")
 
         except requests.exceptions.RequestException as e:
             st.error(f"An error occurred: {e}")
@@ -68,10 +70,14 @@ if submit_button:
             response_dynamo = requests.request("get", end_point, headers=headers, data=payload)
             result_dynamo = json.loads(response_dynamo.text)  # Parse JSON response
 
-            print(response_dynamo.text)
+            body_dynamo = result_dynamo["body"]
+            st.write(body_dynamo)
             st.write("-----------------------------------------------------------")
-            st.write(response_dynamo.text)
 
+            for entity in body_dynamo.items():
+                st.write(entity)
+                st.write("-------------")
+s
         except requests.exceptions.RequestException as e:
             st.error(f"An error occurred: {e}")
 
