@@ -21,19 +21,8 @@ with st.form("patient_form"):
 # Handle form submission
 if submit_button:
     if text_patient_id and text_report_type and text_report_id:
-        print("hello")
-
-        # Define the API endpoint and prepare data for the request
-        # endpoint_url = "https://gyjbea39k8.execute-api.us-west-2.amazonaws.com/dev/v1"
-        # # files = {"file": file.getvalue()}
-        # data = {
-        #     "patient_id": text_patient_id,
-        #     "report_type": text_report_type,
-        #     "report_id": text_report_id
-        # }
 
         endpoint_url = "https://gyjbea39k8.execute-api.us-west-2.amazonaws.com/dev/v1"
-
         payload = json.dumps({
             "patient_id": text_patient_id,
             "report_type": text_report_type,
@@ -45,23 +34,22 @@ if submit_button:
 
         # Make the curl call (POST request in this case)
         try:
-            # # response = requests.post(endpoint_url, files=files, data=data)
-            # response = requests.post(endpoint_url, data=data)
-            # response.raise_for_status()  # Check for request errors
-            # result = response.json()  # Parse JSON response
-            # print(result)
-            #
-            # st.success("Data analyzed successfully!")
-            # st.json(result)  # Display response data
-
             response = requests.request("POST", endpoint_url, headers=headers, data=payload)
             st.text_input(response.text)
 
             result = json.loads(response.text)  # Parse JSON response
             body = json.loads(result["body"])
-            print(body)
-            
+
             st.text_input(body["url"])
+
+            if file:
+                endpoint_url = body["url"]
+                files = {"file": file.getvalue()}
+                data = {}
+                response_file = requests.post(endpoint_url, files=files, data=data)
+
+                print(response_file)
+                st.text_input(response_file)
 
         except requests.exceptions.RequestException as e:
             st.error(f"An error occurred: {e}")
