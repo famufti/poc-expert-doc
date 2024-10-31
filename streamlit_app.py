@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
 import time
+import json
 
 # Set the page title
 st.set_page_config(page_title="Patient's Data Analyzer")
@@ -23,24 +24,39 @@ if submit_button:
         print("hello")
 
         # Define the API endpoint and prepare data for the request
+        # endpoint_url = "https://gyjbea39k8.execute-api.us-west-2.amazonaws.com/dev/v1"
+        # # files = {"file": file.getvalue()}
+        # data = {
+        #     "patient_id": text_patient_id,
+        #     "report_type": text_report_type,
+        #     "report_id": text_report_id
+        # }
+
         endpoint_url = "https://gyjbea39k8.execute-api.us-west-2.amazonaws.com/dev/v1"
-        # files = {"file": file.getvalue()}
-        data = {
+
+        payload = json.dumps({
             "patient_id": text_patient_id,
             "report_type": text_report_type,
             "report_id": text_report_id
+        })
+        headers = {
+            'Content-Type': 'application/json'
         }
 
         # Make the curl call (POST request in this case)
         try:
-            # response = requests.post(endpoint_url, files=files, data=data)
-            response = requests.post(endpoint_url, data=data)
-            response.raise_for_status()  # Check for request errors
-            result = response.json()  # Parse JSON response
-            print(result)
+            # # response = requests.post(endpoint_url, files=files, data=data)
+            # response = requests.post(endpoint_url, data=data)
+            # response.raise_for_status()  # Check for request errors
+            # result = response.json()  # Parse JSON response
+            # print(result)
+            #
+            # st.success("Data analyzed successfully!")
+            # st.json(result)  # Display response data
 
-            st.success("Data analyzed successfully!")
-            st.json(result)  # Display response data
+            response = requests.request("POST", endpoint_url, headers=headers, data=payload)
+            print(response.text)
+
         except requests.exceptions.RequestException as e:
             st.error(f"An error occurred: {e}")
 
