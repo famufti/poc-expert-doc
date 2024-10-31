@@ -57,6 +57,8 @@ if submit_button:
             response = requests.request("POST", endpoint_url, headers=headers, data=payload)
             print(response.text)
 
+            st.text_input(response.text)
+
         except requests.exceptions.RequestException as e:
             st.error(f"An error occurred: {e}")
 
