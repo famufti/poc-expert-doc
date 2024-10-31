@@ -43,13 +43,15 @@ if submit_button:
             st.text_input(body["url"])
 
             if file:
+                print("----File----")
                 endpoint_url = body["url"]
                 files = {"file": file.getvalue()}
                 # data = {}
-                response_file = requests.post(endpoint_url, files=files)
+                print(files)
 
+                response_file = requests.post(endpoint_url, files=files)
                 print(response_file)
-                st.text_input(response_file)
+                # st.text_input(response_file)
 
         except requests.exceptions.RequestException as e:
             st.error(f"An error occurred: {e}")
