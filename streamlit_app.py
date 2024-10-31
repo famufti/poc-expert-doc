@@ -57,7 +57,7 @@ if submit_button:
             st.error(f"An error occurred: {e}")
 
         # Sleeping for 5 seconds
-        time.sleep(30)
+        time.sleep(20)
 
         try:
             # Created data for Curl call
@@ -74,7 +74,7 @@ if submit_button:
             st.write(body_dynamo)
             st.write("-----------------------------------------------------------")
 
-            for entity in body_dynamo.items():
+            for entity in body_dynamo:
                 st.write(entity)
                 st.write("-------------")
 
