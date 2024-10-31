@@ -77,7 +77,7 @@ if submit_button:
             for entity in body_dynamo.items():
                 st.write(entity)
                 st.write("-------------")
-s
+
         except requests.exceptions.RequestException as e:
             st.error(f"An error occurred: {e}")
 
