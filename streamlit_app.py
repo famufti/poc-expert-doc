@@ -50,7 +50,8 @@ if submit_button:
             if file:
                 upload_response = requests.put(presigned_url, data=file.getvalue())
 
-                st.write(file_name + " uploaded")
+                # st.write(file_name + " uploaded")
+                st.write("Patient data submitted...")
                 st.write("-----------------------------------------------------------")
 
         except requests.exceptions.RequestException as e:
@@ -75,7 +76,7 @@ if submit_button:
             # st.write("-----------------------------------------------------------")
 
             for report_category in body_dynamo:
-                st.write(report_category["Report#Category"])
+                st.write(report_category["Report#Category"].removeprefix('prescription#'))
                 st.write("Entities")
                 for entity in report_category["Entities"]:
                     st.write(" - " + entity)
