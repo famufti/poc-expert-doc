@@ -55,11 +55,10 @@ if submit_button:
             # st.json(result)  # Display response data
 
             response = requests.request("POST", endpoint_url, headers=headers, data=payload)
-            print(response.text)
             # st.text_input(response.text)
 
-            result = response.json()  # Parse JSON response
-            st.text_input(result)
+            result = response.text  # Parse JSON response
+            # st.text_input(result)
             st.text_input(result["body"]["url"])
 
         except requests.exceptions.RequestException as e:
