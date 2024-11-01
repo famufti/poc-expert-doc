@@ -4,28 +4,28 @@ import time
 import json
 
 """ 
-import time
-
-def fetch_report_categories(api_url, headers):
-    try:
-        response = requests.get(api_url, headers=headers)
-        data = response.json()
-
-        if data:  # If data is returned, stop the recursion
-            return data
-        else:
-            time.sleep(5)  # Wait for 5 seconds before the next call
-            return fetch_report_categories(api_url, headers)  # Recursive call
-    except requests.exceptions.RequestException as e:
-        st.error(f"An error occurred: {e}")
-        return None
-
-# Example usage
-api_url = "https://example.com/api/report-categories"
-headers = {'Content-Type': 'application/json'}
-report_categories = fetch_report_categories(api_url, headers)
-if report_categories:
-    st.write(report_categories)
+# import time
+# 
+# def fetch_report_categories(api_url, headers):
+#     try:
+#         response = requests.get(api_url, headers=headers)
+#         data = response.json()
+# 
+#         if data:  # If data is returned, stop the recursion
+#             return data
+#         else:
+#             time.sleep(5)  # Wait for 5 seconds before the next call
+#             return fetch_report_categories(api_url, headers)  # Recursive call
+#     except requests.exceptions.RequestException as e:
+#         st.error(f"An error occurred: {e}")
+#         return None
+# 
+# # Example usage
+# api_url = "https://example.com/api/report-categories"
+# headers = {'Content-Type': 'application/json'}
+# report_categories = fetch_report_categories(api_url, headers)
+# if report_categories:
+#     st.write(report_categories)
 """
 
 # Set the page title
