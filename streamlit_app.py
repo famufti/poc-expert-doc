@@ -3,7 +3,7 @@ import requests
 import time
 import json
 
-""" 
+
 # import time
 # 
 # def fetch_report_categories(api_url, headers):
@@ -26,7 +26,6 @@ import json
 # report_categories = fetch_report_categories(api_url, headers)
 # if report_categories:
 #     st.write(report_categories)
-"""
 
 # Set the page title
 st.set_page_config(page_title="Patient's Data Analyzer")
