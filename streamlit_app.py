@@ -58,7 +58,7 @@ if submit_button:
             st.error(f"An error occurred: {e}")
 
         # Sleeping for 5 seconds
-        time.sleep(20)
+        time.sleep(30)
 
         try:
             # Created data for Curl call
