@@ -37,7 +37,16 @@ st.title("Patient's Data Analyzer")
 with st.form("patient_form"):
     file = st.file_uploader("Select a file", type=["jpg", "png", "pdf"])
     text_patient_id = st.text_input("Enter Patient ID")
-    text_report_type = st.text_input("Enter Record Type")
+    # text_report_type = st.text_input("Enter Record Type")
+
+    # Dropdown for selecting an option
+    st.title("Select an Record Type")
+
+    options = ["Prescription", "Consultation note", "Discharge summary", "Imaging report", "Laboratory test report", "Pathology report"]
+    text_report_type = st.selectbox("Select an Record Type:", options)
+
+    # Display the selected option
+    st.write("You selected:", text_report_type)
 
     submit_button = st.form_submit_button("Submit")
 
@@ -76,13 +85,13 @@ if submit_button:
 
                 # st.write(file_name + " uploaded")
                 st.write("Patient data submitted...")
-                st.write("-----------------------------------------------------------")
+                # st.write("-----------------------------------------------------------")
 
         except requests.exceptions.RequestException as e:
             st.error(f"An error occurred: {e}")
 
         # Sleeping for 5 seconds
-        with st.spinner("Loading..."):
+        with st.spinner("Waiting for response..."):
             time.sleep(30)
 
             try:
