@@ -39,11 +39,8 @@ with st.form("patient_form"):
     text_patient_id = st.text_input("Enter Patient ID")
     # text_report_type = st.text_input("Enter Record Type")
 
-    # Dropdown for selecting an option
-    st.title("Select an Record Type")
-
     options = ["Prescription", "Consultation note", "Discharge summary", "Imaging report", "Laboratory test report", "Pathology report"]
-    text_report_type = st.selectbox("Select an Record Type:", options)
+    text_report_type = st.selectbox("Select Record Type:", options)
 
     # Display the selected option
     st.write("You selected:", text_report_type)
