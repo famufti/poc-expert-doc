@@ -42,9 +42,6 @@ with st.form("patient_form"):
     options = ["Prescription", "Consultation note", "Discharge summary", "Imaging report", "Laboratory test report", "Pathology report"]
     text_report_type = st.selectbox("Select Record Type:", options)
 
-    # Display the selected option
-    st.write("You selected:", text_report_type)
-
     submit_button = st.form_submit_button("Submit")
 
 # Handle form submission
@@ -103,7 +100,7 @@ if submit_button:
                 result_dynamo = json.loads(response_dynamo.text)  # Parse JSON response
 
                 body_dynamo = result_dynamo["body"]
-                # st.write(body_dynamo)
+
                 st.success("Data loaded successfully!")
                 st.write("-----------------------------------------------------------")
 
@@ -116,8 +113,3 @@ if submit_button:
 
             except requests.exceptions.RequestException as e:
                 st.error(f"An error occurred: {e}")
-
-    # if file:
-    #     with st.spinner("Analyzing data..."):
-    # else:
-    #     st.warning("Please fill in all fields and upload a file.")
