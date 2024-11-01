@@ -3,6 +3,31 @@ import requests
 import time
 import json
 
+""" 
+import time
+
+def fetch_report_categories(api_url, headers):
+    try:
+        response = requests.get(api_url, headers=headers)
+        data = response.json()
+
+        if data:  # If data is returned, stop the recursion
+            return data
+        else:
+            time.sleep(5)  # Wait for 5 seconds before the next call
+            return fetch_report_categories(api_url, headers)  # Recursive call
+    except requests.exceptions.RequestException as e:
+        st.error(f"An error occurred: {e}")
+        return None
+
+# Example usage
+api_url = "https://example.com/api/report-categories"
+headers = {'Content-Type': 'application/json'}
+report_categories = fetch_report_categories(api_url, headers)
+if report_categories:
+    st.write(report_categories)
+"""
+
 # Set the page title
 st.set_page_config(page_title="Patient's Data Analyzer")
 
@@ -58,32 +83,34 @@ if submit_button:
             st.error(f"An error occurred: {e}")
 
         # Sleeping for 5 seconds
-        time.sleep(30)
+        with st.spinner("Loading..."):
+            time.sleep(30)
 
-        try:
-            # Created data for Curl call
-            end_point = "https://esmjsglf4h.execute-api.us-west-2.amazonaws.com/dev/v1/?patient_id=" + text_patient_id
-            payload = {}
-            headers = {
-                'Content-Type': 'application/json'
-            }
+            try:
+                # Created data for Curl call
+                end_point = "https://esmjsglf4h.execute-api.us-west-2.amazonaws.com/dev/v1/?patient_id=" + text_patient_id
+                payload = {}
+                headers = {
+                    'Content-Type': 'application/json'
+                }
 
-            response_dynamo = requests.request("get", end_point, headers=headers, data=payload)
-            result_dynamo = json.loads(response_dynamo.text)  # Parse JSON response
+                response_dynamo = requests.request("get", end_point, headers=headers, data=payload)
+                result_dynamo = json.loads(response_dynamo.text)  # Parse JSON response
 
-            body_dynamo = result_dynamo["body"]
-            # st.write(body_dynamo)
-            # st.write("-----------------------------------------------------------")
+                body_dynamo = result_dynamo["body"]
+                # st.write(body_dynamo)
+                st.success("Data loaded successfully!")
+                st.write("-----------------------------------------------------------")
 
-            for report_category in body_dynamo:
-                st.write(report_category["Report#Category"].removeprefix('prescription#'))
-                st.write("Entities")
-                for entity in report_category["Entities"]:
-                    st.write(" - " + entity)
-                st.write("-------------")
+                for report_category in body_dynamo:
+                    st.write(report_category["Report#Category"].removeprefix('prescription#'))
+                    st.write("Entities")
+                    for entity in report_category["Entities"]:
+                        st.write(" - " + entity)
+                    st.write("-------------")
 
-        except requests.exceptions.RequestException as e:
-            st.error(f"An error occurred: {e}")
+            except requests.exceptions.RequestException as e:
+                st.error(f"An error occurred: {e}")
 
     # if file:
     #     with st.spinner("Analyzing data..."):
